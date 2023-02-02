@@ -29,6 +29,7 @@ code {
 }
 
 body {
+	background: #00020b;
 	font-family: $font-hei;
 	font-size: 16px;
 }
@@ -37,7 +38,6 @@ body {
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
-	background: lightblue;
 }
 
 .App {
