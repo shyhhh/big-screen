@@ -1,9 +1,52 @@
 @import "../shared/helper";
 
 .home {
-	header {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	height: 100%;
+
+	> header {
 		border: 1px solid red;
 		height: px(98);
 		background-size: cover;
+	}
+
+	> main {
+		display: grid;
+		flex: 1;
+
+		grid-template: "box1 box2 box4 box5" 755fr
+		"box3 box3 box4 box5" 363fr / 366fr 361fr 811fr 747fr;
+
+		> .section1 {
+			background: pink;
+
+			grid-area: box1;
+		}
+
+		> .section2 {
+			background: lightgray;
+
+			grid-area: box2;
+		}
+
+		> .section3 {
+			background: lightblue;
+
+			grid-area: box3;
+		}
+
+		> .section4 {
+			background: lightcyan;
+
+			grid-area: box4;
+		}
+
+		> .section5 {
+			background: lightyellow;
+
+			grid-area: box5;
+		}
 	}
 }

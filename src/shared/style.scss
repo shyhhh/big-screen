@@ -34,6 +34,12 @@ body {
 }
 
 #root {
+	display: flex;
+	flex-direction: column;
 	margin: 0 auto;
 	background: lightblue;
+}
+
+.App {
+	flex: 1;
 }
