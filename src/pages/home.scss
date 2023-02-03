@@ -6,6 +6,7 @@
 	flex: 1;
 	height: 100%;
 	background: #010310;
+	color: white;
 
 	> header {
 		height: px(98);
@@ -23,6 +24,10 @@
 		grid-row-gap: px(28);
 
 		> section {
+			text-align: center;
+		}
+
+		.bordered {
 			position: relative;
 			border: 1px solid #0764bc;
 			border-radius: 4px;
@@ -66,6 +71,29 @@
 
 		> .section5 {
 			grid-area: box5;
+		}
+
+		.管辖统计 {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: px(315);
+
+			h2 {
+				flex-shrink: 0;
+				padding: px(10) px(28);
+				border: 1px solid #0a5299;
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
+				line-height: px(24);
+				text-shadow: 0 0 px(3) white;
+				font-size: px(22);
+			}
+
+			.chart {
+				flex: 1;
+				width: 100%;
+			}
 		}
 	}
 }
