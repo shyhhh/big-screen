@@ -18,6 +18,9 @@ export const Chart2 = () => {
         },
         yAxis: {
           axisTick: { show: false },
+          axisLine: {
+            lineStyle: { color: '#083B70' },
+          },
           type: 'category',
           data: [
             '城关区公安局',
