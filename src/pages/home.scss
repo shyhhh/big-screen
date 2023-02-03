@@ -5,6 +5,7 @@
 	flex-direction: column;
 	flex: 1;
 	background: #010310;
+	font-size: px(16);
 	color: white;
 
 	> header {
@@ -40,19 +41,17 @@
 				top: 0;
 				bottom: 0;
 				border-radius: 4px;
-				box-shadow: 17px 0 0 -16px #0e325f,
-				-17px 0 0 -16px #0e325f,
-				0 17px 0 -16px #0e325f,
-				0 -17px 0 -16px #0e325f,
-				9px 0 0 -8px #0d4483,
-				-9px 0 0 -8px #0d4483,
-				0 9px 0 -8px #0d4483,
-				0 -9px 0 -8px #0d4483,;
+				box-shadow: 17px 0 0 -16px #0e325f, -17px 0 0 -16px #0e325f, 0 17px 0 -16px #0e325f, 0 -17px 0 -16px #0e325f,
+				9px 0 0 -8px #0d4483, -9px 0 0 -8px #0d4483, 0 9px 0 -8px #0d4483, 0 -9px 0 -8px #0d4483;
 				content: "";
 			}
 		}
 
 		> .section1 {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
 			grid-area: box1;
 		}
 
@@ -92,6 +91,46 @@
 			.chart {
 				flex: 1;
 				width: 100%;
+			}
+		}
+
+		.破获排名 {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: px(423);
+
+			h2 {
+				flex-shrink: 0;
+				padding: px(10) px(28);
+				border: 1px solid #0a5299;
+				border-bottom-left-radius: 4px;
+				border-bottom-right-radius: 4px;
+				line-height: px(24);
+				text-shadow: 0 0 px(3) white;
+				font-size: px(22);
+			}
+
+			.chart {
+				flex: 1;
+				width: 100%;
+			}
+
+			.legend {
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+				padding: 0 px(20) px(10);
+				width: 100%;
+
+				> .first,
+				> .second {
+					display: inline-block;
+					margin: 0 px(10);
+					width: px(18);
+					height: px(12);
+					background: red;
+				}
 			}
 		}
 	}
