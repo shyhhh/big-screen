@@ -24,7 +24,7 @@ export const Chart8 = () => {
               show: true,
               position: 'inside',
               textStyle: { color: 'white', fontSize: px(20) },
-              formatter(options) {
+              formatter(options: any) {
                 return (options.value * 100).toFixed(0) + '%'
               },
             },

@@ -30,7 +30,7 @@ export const Chart12 = () => {
           textStyle: { color: 'white' },
           itemWidth: px(10),
           itemHeight: px(10),
-          formatter(name) {
+          formatter(name: string) {
             const value = data.find(i => i.name === name)?.value * 100 + '%'
             return name + ' ' + value
           },

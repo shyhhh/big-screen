@@ -25,7 +25,7 @@ export const Chart11 = () => {
               position: 'outside',
               textStyle: { color: 'white', fontSize: px(20) },
               distanceToLabelLine: 0,
-              formatter(options) {
+              formatter(options: any) {
                 return options.value * 100 + '%'
               },
             },

@@ -23,7 +23,7 @@ export const Chart7 = () => {
               show: true,
               position: 'inside',
               textStyle: { color: 'white', fontSize: px(20) },
-              formatter(options) {
+              formatter(options: any) {
                 return options.value * 100 + '%'
               },
             },

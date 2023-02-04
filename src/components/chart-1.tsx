@@ -25,7 +25,7 @@ export const Chart1 = () => {
             lineStyle: { color: '#083B70' },
           },
           axisLabel: {
-            formatter(val) {
+            formatter(val: string) {
               if (val.length > 2) {
                 const array = val.split('')
                 array.splice(2, 0, '\n')
