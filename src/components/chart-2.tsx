@@ -6,9 +6,37 @@ import { createEchartsOptions } from '../shared/create-echarts-options'
 
 export const Chart2 = () => {
   const divRef = useRef(null)
+  const myChart = useRef(null)
+  const data = [
+    { name: '城关区公安局', 2021: 2, 2022: 3 },
+    { name: '七里河区公安局', 2021: 2, 2022: 3 },
+    { name: '西固区公安局', 2021: 2, 2022: 3 },
+    { name: '安宁区公安局', 2021: 2, 2022: 3 },
+    { name: '红古区公安局', 2021: 2, 2022: 3 },
+    { name: '永登县公安局', 2021: 2, 2022: 3 },
+    { name: '皋兰县公安局', 2021: 2, 2022: 3 },
+    { name: '榆中县公安局', 2021: 2, 2022: 3 },
+    { name: '新区公安局', 2021: 2, 2022: 3 },
+  ]
   useEffect(() => {
     var myChart = echarts.init(divRef.current)
-    myChart.setOption(
+    setInterval(() => {
+      const newData = [
+        { name: '城关区公安局', 2021: 2, 2022: Math.random() * 10 },
+        { name: '七里河区公安局', 2021: 2, 2022: 3 },
+        { name: '西固区公安局', 2021: 2, 2022: 3 },
+        { name: '安宁区公安局', 2021: 2, 2022: 3 },
+        { name: '红古区公安局', 2021: 2, 2022: 3 },
+        { name: '永登县公安局', 2021: 2, 2022: 3 },
+        { name: '皋兰县公安局', 2021: 2, 2022: 3 },
+        { name: '榆中县公安局', 2021: 2, 2022: 3 },
+        { name: '新区公安局', 2021: 2, 2022: 3 },
+      ]
+      x(newData)
+    }, 1000)
+  }, [])
+  const x = (data: any) => {
+    myChart.current.setOption(
       createEchartsOptions({
         xAxis: {
           type: 'value',
@@ -22,17 +50,7 @@ export const Chart2 = () => {
             lineStyle: { color: '#083B70' },
           },
           type: 'category',
-          data: [
-            '城关区公安局',
-            '七里河区公安局',
-            '西固区公安局',
-            '安宁区公安局',
-            '红古区公安局',
-            '永登县公安局',
-            '皋兰县公安局',
-            '榆中县公安局',
-            '新区公安局',
-          ],
+          data: data.map((i: any) => i.name),
           axisLabel: {
             formatter(val: string) {
               return val.replace('公安局', '\n公安局')
@@ -41,38 +59,38 @@ export const Chart2 = () => {
         },
         series: [
           {
-            name: '2011年',
+            name: '2021年',
             type: 'bar',
-            data: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            data: data.map((i: string) => i[2021]),
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
-                    color: '#2034f9',
+                    color: '#2034F9',
                   },
                   {
                     offset: 1,
-                    color: '#04a1ff',
+                    color: '#04A1FF',
                   },
                 ]),
               },
             },
           },
           {
-            name: '2012年',
+            name: '2022年',
             type: 'bar',
-            data: [2, 3, 4, 5, 6, 7, 8, 9, 10],
+            data: data.map((i: string) => i[2022]),
             itemStyle: {
               normal: {
                 color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
                   {
                     offset: 0,
-                    color: '#b92ae8',
+                    color: '#B92AE8',
                   },
                   {
                     offset: 1,
-                    color: '#6773e7',
+                    color: '#6773E7',
                   },
                 ]),
               },
@@ -81,6 +99,10 @@ export const Chart2 = () => {
         ],
       })
     )
+  }
+  useEffect(() => {
+    myChart.current = echarts.init(divRef.current)
+    x(data)
   }, [])
 
   return (
