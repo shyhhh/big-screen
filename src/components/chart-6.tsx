@@ -7,7 +7,7 @@ import china from '../geo/hangzhou.json'
 
 export const Chart6 = () => {
   const divRef = useRef(null)
-  const colors = { 余杭区: '#BB31F7', 滨江区: '#15B8FD', 下沙区: '#06E1EE' }
+  const colors = { 余杭区: '#BB31F7', 滨江区: '#0a60f6', 拱墅区: '#5470C6' }
   useEffect(() => {
     var myChart = echarts.init(divRef.current)
     // @ts-ignore
