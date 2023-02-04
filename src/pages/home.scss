@@ -148,9 +148,11 @@
 				flex: 1;
 			}
 
-			&-图1 {
+			&-图1,
+			&-图2 {
 				.legend {
 					display: flex;
+					flex-wrap: wrap;
 					justify-content: center;
 					align-items: center;
 					height: px(40);
@@ -158,9 +160,9 @@
 					> span {
 						display: inline-block;
 						margin: 0 px(10);
-						border-radius: px(4);
-						width: px(40);
-						height: px(20);
+						border-radius: px(2);
+						width: px(16);
+						height: px(10);
 					}
 
 					.male {
@@ -190,6 +192,15 @@
 						color: #33a4fa;
 						transform: translate(-50%, -50%);
 					}
+				}
+			}
+
+			&-图2 {
+				flex-shrink: 0;
+				width: px(290);
+
+				.legend {
+					justify-content: flex-start;
 				}
 			}
 		}
