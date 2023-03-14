@@ -46,7 +46,7 @@ export const Home = () => {
         </section>
         <section className="section5">
           <div className="bordered row1 案发类型">
-            <h2>案发类型统计</h2>
+            <h2>历年案发类型统计</h2>
             <div className="charts">
               <Chart10 />
               <Chart11 />

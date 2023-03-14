@@ -1,12 +1,31 @@
 import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { createEchartsOptions } from '../shared/create-echarts-options'
+import { faker } from '@faker-js/faker'
 
+let qu = []
+const getData = () => {
+  for (let i = 0; i < 5; i++) {
+    qu.push(faker.finance.amount() / 10)
+  }
+  return qu
+}
+console.log(getData())
 export const Chart10 = () => {
   const divRef = useRef(null)
+  const myChart = useRef(null)
+  const data = getData()
   useEffect(() => {
     var myChart = echarts.init(divRef.current)
-    myChart.setOption(
+    setInterval(() => {
+      qu = []
+      const newData = getData()
+      x(newData)
+    }, 2500)
+  }, [])
+
+  const x = (data) => {
+    myChart.current.setOption(
       createEchartsOptions({
         xAxis: {
           data: ['入室抢劫', '当街偷盗', '团伙诈骗', '刑事案件', '民事案件'],
@@ -37,7 +56,7 @@ export const Chart10 = () => {
         series: [
           {
             type: 'bar',
-            data: [40, 22, 20, 18, 32],
+            data: data,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
@@ -52,6 +71,10 @@ export const Chart10 = () => {
         ],
       })
     )
+  }
+  useEffect(() => {
+    myChart.current = echarts.init(divRef.current)
+    x(data)
   }, [])
 
   return <div ref={divRef} className="chart"></div>
