@@ -2,37 +2,32 @@ import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { createEchartsOptions } from '../shared/create-echarts-options'
 import { px } from '../shared/px'
+import { faker } from '@faker-js/faker'
 
+const dataChart3 = (i) => ({
+  name: i, h1: faker.finance.amount(), h2: faker.finance.amount(), h3: faker.finance.amount(), h4: faker.finance.amount(), h5: faker.finance.amount()
+})
+let data1 = []
+const getData = (action) => {
+  for (let i = 1; i <= 12; i++) {
+    data1.push(action(i))
+  }
+  return data1
+}
 export const Chart3 = () => {
   const divRef = useRef(null)
   const myChart = useRef(null)
-  const data = [
-    { name: '2015', h1: 0.01, h2: 0.05, h3: 0.09, h4: 0.09, h5: 0.02 },
-    { name: '2016', h1: 0.02, h2: 0.04, h3: 0.08, h4: 0.13, h5: 0.11 },
-    { name: '2017', h1: 0.03, h2: 0.02, h3: 0.07, h4: 0.15, h5: 0.09 },
-    { name: '2018', h1: 0.04, h2: 0.09, h3: 0.06, h4: 0.06, h5: 0.01 },
-    { name: '2019', h1: 0.11, h2: 0.13, h3: 0.04, h4: 0.03, h5: 0.03 },
-    { name: '2020', h1: 0.22, h2: 0.09, h3: 0.05, h4: 0.02, h5: 0.07 },
-    { name: '2021', h1: 0.2,  h2: 0.03, h3: 0.07, h4: 0.01, h5: 0.08 },
-    { name: '2022', h1: 0.08, h2: 0.01, h3: 0.09, h4: 0.03, h5: 0.03 },
-    { name: '2023', h1: 0.01, h2: 0.02, h3: 0.01, h4: 0.13, h5: 0.18 },
-  ]
+  const data = getData(dataChart3)
   useEffect(() => {
     var myChart = echarts.init(divRef.current)
-    setInterval(() => {
-      const newData = [
-        { name: '2015', h1: Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2016', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2017', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2018', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2019', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2020', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2021', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2022', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-        { name: '2023', h1:  Math.random()/10, h2:  Math.random()/10, h3:  Math.random()/10, h4:  Math.random()/10, h5:  Math.random()/10 },
-      ]
+    const id = setInterval(() => {
+      data1 = []
+      const newData = getData(dataChart3)
       x(newData)
     }, 3000)
+    return () => {
+      clearInterval(id)
+    }
   }, [])
   const x = (data: any) => {
     myChart.current.setOption(
@@ -63,7 +58,7 @@ export const Chart3 = () => {
           splitLine: { lineStyle: { color: '#073E78' } },
           axisLabel: {
             formatter(val: number) {
-              return val * 100 + '%'
+              return Math.floor((val / 150)) + '%'
             },
           },
         },
@@ -102,14 +97,14 @@ export const Chart3 = () => {
       })
     )
   }
-    useEffect(() => {
-      myChart.current = echarts.init(divRef.current)
-      x(data)
+  useEffect(() => {
+    myChart.current = echarts.init(divRef.current)
+    x(data)
   }, [])
 
   return (
     <div className="bordered 发案趋势">
-      <h2>发案趋势分析</h2>
+      <h2>历年发案趋势分析</h2>
       <div ref={divRef} className="chart" />
     </div>
   )
