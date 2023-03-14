@@ -4,7 +4,7 @@ import { createEchartsOptions } from '../shared/create-echarts-options'
 import { faker } from '@faker-js/faker'
 
 let data1 = []
-const qu = ['拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '上城区','钱塘区','临平区']
+const qu = ['拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '上城区', '钱塘区', '临平区']
 const getData = (name) => {
   for (let i = 0; i < name.length; i++) {
     data1.push(name[i])
@@ -21,12 +21,23 @@ const amount = (length) => {
 
 export const Chart1 = () => {
   const divRef = useRef(null)
+  const myChart = useRef(null)
+
+  const data = amount(8)
+  console.log(data)
   useEffect(() => {
     var myChart = echarts.init(divRef.current)
-    myChart.setOption(
+    setInterval(() => {
+      quData = []
+      const newData = amount(8)
+      x(newData)
+    }, 1500)
+  }, [])
+  const x = (data: any) => {
+    myChart.current.setOption(
       createEchartsOptions({
         xAxis: {
-          data: getData(qu),
+          data: qu,
           axisTick: { show: false },
           axisLine: {
             lineStyle: { color: '#083B70' },
@@ -54,11 +65,15 @@ export const Chart1 = () => {
         series: [
           {
             type: 'bar',
-            data: amount(8),
+            data: data,
           },
         ],
       })
     )
+  }
+  useEffect(() => {
+    myChart.current = echarts.init(divRef.current)
+    x(data)
   }, [])
 
   return (
