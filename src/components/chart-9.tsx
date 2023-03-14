@@ -2,18 +2,34 @@ import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { createEchartsOptions } from '../shared/create-echarts-options'
 import { px } from '../shared/px'
-
+import { faker } from '@faker-js/faker'
+let qu = []
+const getData = () => {
+  for (let i = 0; i < 8; i++) {
+    qu.push((faker.finance.amount() / 16000).toFixed(2))
+  }
+  return qu
+}
 export const Chart9 = () => {
   const divRef = useRef(null)
+  const myChart = useRef(null)
+  const data = getData()
   useEffect(() => {
     var myChart = echarts.init(divRef.current)
-    myChart.setOption(
+    setInterval(() => {
+      qu = []
+      const newData = getData()
+      x(newData)
+    }, 2500)
+  }, [])
+  const x = (data: any) => {
+    myChart.current.setOption(
       createEchartsOptions({
         color: '#F7A110',
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: [0, 18, 28, 38, 48, 58, 68, 78],
+          data: [10, 18, 28, 38, 48, 58, 68, 78],
           splitLine: { show: true, lineStyle: { color: '#073E78' } },
           axisTick: { show: false },
           axisLine: { show: false },
@@ -30,7 +46,7 @@ export const Chart9 = () => {
         series: [
           {
             type: 'line',
-            data: [0.19, 0.2, 0.26, 0.35, 0.26, 0.2, 0.08, 0.06],
+            data: data,
             symbol: 'circle',
             symbolSize: px(12),
             lineStyle: { width: px(2) },
@@ -50,6 +66,11 @@ export const Chart9 = () => {
         ],
       })
     )
+  }
+
+  useEffect(() => {
+    myChart.current = echarts.init(divRef.current)
+    x(data)
   }, [])
 
   return (
