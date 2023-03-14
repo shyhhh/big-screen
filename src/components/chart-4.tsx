@@ -2,12 +2,31 @@ import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { createEchartsOptions } from '../shared/create-echarts-options'
 import { px } from '../shared/px'
+import { faker } from '@faker-js/faker'
 
+let qu = []
+const getData = () => {
+  for (let i = 0; i <= 12; i++) {
+    qu.push(faker.finance.amount()/1000)
+  }
+  return qu
+}
 export const Chart4 = () => {
   const divRef = useRef(null)
+  const myChart = useRef(null)
+  const data = getData()
   useEffect(() => {
     var myChart = echarts.init(divRef.current)
-    myChart.setOption(
+    setInterval(() => {
+      qu = []
+      const newData = getData()
+      x(newData)
+    }, 2500)
+  }, [])
+
+
+  const x = (data: any) => {
+    myChart.current.setOption(
       createEchartsOptions({
         xAxis: {
           type: 'category',
@@ -21,7 +40,7 @@ export const Chart4 = () => {
           type: 'value',
           splitLine: { lineStyle: { color: '#073E78' } },
           axisLabel: {
-            formatter(val:number) {
+            formatter(val: number) {
               return val * 100 + '%'
             },
           },
@@ -29,7 +48,7 @@ export const Chart4 = () => {
         series: [
           {
             type: 'line',
-            data: [0.15, 0.13, 0.11, 0.13, 0.14, 0.15, 0.16, 0.18, 0.21, 0.19, 0.17, 0.16, 0.15],
+            data: data,
             symbol: 'circle',
             symbolSize: px(12),
             lineStyle: { width: px(2) },
@@ -49,11 +68,14 @@ export const Chart4 = () => {
         ],
       })
     )
+  }
+  useEffect(() => {
+    myChart.current = echarts.init(divRef.current)
+    x(data)
   }, [])
-
   return (
     <div className="bordered 案发时段">
-      <h2>案发时段分析</h2>
+      <h2>全年案发时段分析</h2>
       <div ref={divRef} className="chart" />
     </div>
   )
