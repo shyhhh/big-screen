@@ -1,6 +1,23 @@
 import React, { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
 import { createEchartsOptions } from '../shared/create-echarts-options'
+import { faker } from '@faker-js/faker'
+
+let data1 = []
+const qu = ['拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '上城区','钱塘区','临平区']
+const getData = (name) => {
+  for (let i = 0; i < name.length; i++) {
+    data1.push(name[i])
+  }
+  return data1
+}
+let quData = []
+const amount = (length) => {
+  for (let i = 0; i < length; i++) {
+    quData.push(faker.finance.amount())
+  }
+  return quData
+}
 
 export const Chart1 = () => {
   const divRef = useRef(null)
@@ -9,17 +26,7 @@ export const Chart1 = () => {
     myChart.setOption(
       createEchartsOptions({
         xAxis: {
-          data: [
-            '兰州新区',
-            '兰州新区',
-            '兰州新区',
-            '兰州新区',
-            '兰州新区',
-            '兰州新区',
-            '兰州新区',
-            '兰州新区',
-            '兰州新区',
-          ],
+          data: getData(qu),
           axisTick: { show: false },
           axisLine: {
             lineStyle: { color: '#083B70' },
@@ -47,7 +54,7 @@ export const Chart1 = () => {
         series: [
           {
             type: 'bar',
-            data: [10, 20, 36, 41, 15, 26, 37, 18, 29],
+            data: amount(8),
           },
         ],
       })
@@ -56,7 +63,7 @@ export const Chart1 = () => {
 
   return (
     <div className="bordered 管辖统计">
-      <h2>案发派出所管辖统计</h2>
+      <h2>部分案发派出所管辖统计</h2>
       <div ref={divRef} className="chart"></div>
     </div>
   )
